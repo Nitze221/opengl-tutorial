@@ -99,9 +99,12 @@ int main() {
 
 	// triangle coords clip space
 	float vertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			-1.0f, -0.5f, 0.0f,
+			 0.0f, -0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f,
+			 0.0f, -0.5f, 0.0f,
+			 1.0f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f
 	};
 
 	//vertex array object
@@ -124,6 +127,8 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	// wireframe
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
@@ -134,7 +139,7 @@ int main() {
 		//use program
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
