@@ -1,0 +1,2 @@
+﻿glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Users\nicla\OpenGL\tutorial\x64\Debug\glfw3.pdb'; linking object as if no debug info
+  tutorial.vcxproj -> C:\Users\nicla\OpenGL\tutorial\x64\Debug\tutorial.exe
