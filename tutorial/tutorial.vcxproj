@@ -134,6 +134,19 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Downloads\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stb_image_include.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shader.hpp" />
+    <ClInclude Include="stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.fs" />
+    <None Include="shader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Downloads\container.jpg" />
+    <Image Include="..\..\..\Downloads\happy.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
