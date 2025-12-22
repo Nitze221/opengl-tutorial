@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Downloads\glad\src\glad.c" />
+    <ClCompile Include="..\..\..\..\..\Dev\Libs\OpenGL\other\glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stb_image_include.cpp" />
   </ItemGroup>

@@ -2,6 +2,10 @@
 #include <GLFW/glfw3.h>
 #include "stb_image.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 
 #include "shader.hpp"
@@ -30,11 +34,11 @@ int main() {
 		return -1;
 	}
 
-	//----------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------
 	// shader programs
 	Shader shader("shader.vs", "shader.fs");
 
-	//----------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------
 	// vertex data and buffers
 
 	// 2 triangle coords clip space
@@ -99,7 +103,7 @@ int main() {
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	// textures
-	//----------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------
 
 	unsigned int texture;
 	glGenTextures(1, &texture);
@@ -168,9 +172,24 @@ int main() {
 	shader.setInt("texture1", 1);
 	shader.setInt("texture2", 0);
 
+
+	
+
 	// render loop
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
+
+		// transformations
+		//------------------------------------------------------------------------------------------------------------
+
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::rotate(trans,(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		
+
+		unsigned int transformLoc = glGetUniformLocation(shader.ID, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -187,6 +206,15 @@ int main() {
 		shader.use();
 
 		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		trans = glm::mat4(1.0f);
+		trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, -0.0f));
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		
