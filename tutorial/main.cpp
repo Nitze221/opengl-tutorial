@@ -65,15 +65,15 @@ int main() {
 	};
 
 	//vertex array object
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	unsigned int VAO1;
+	glGenVertexArrays(1, &VAO1);
+	glBindVertexArray(VAO1);
 
 	//vertex buffer (object)
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
+	unsigned int VBO1;
+	glGenBuffers(1, &VBO1);
 	
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	//element buffer (object)
@@ -205,7 +205,7 @@ int main() {
 		// use program
 		shader.use();
 
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAO1);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		trans = glm::mat4(1.0f);
@@ -226,8 +226,8 @@ int main() {
 		glfwPollEvents();
 	}
 	// de allocate resources, no longer needed (optional)
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAO1);
+	glDeleteBuffers(1, &VBO1);
 
 	glfwTerminate();
 
