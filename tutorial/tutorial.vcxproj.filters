@@ -21,7 +21,7 @@
     <ClCompile Include="stb_image_include.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Dev\Libs\OpenGL\other\glad.c">
+    <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

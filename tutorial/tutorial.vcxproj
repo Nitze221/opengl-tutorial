@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Dev\Libs\OpenGL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Dev\Libs\OpenGL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\ncaja\opengl-tutorial\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\ncaja\opengl-tutorial\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Dev\Libs\OpenGL\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>C:\Dev\Libs\OpenGL\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\Users\ncaja\opengl-tutorial\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\Users\ncaja\opengl-tutorial\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,8 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Dev\Libs\OpenGL\other\glad.c" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="main.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\OpenGL\include;C:\Users\ncaja\opengl-tutorial\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\OpenGL\include;C:\Users\ncaja\opengl-tutorial\include</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="stb_image_include.cpp" />
   </ItemGroup>
   <ItemGroup>
