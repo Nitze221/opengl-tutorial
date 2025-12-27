@@ -215,6 +215,8 @@ int main() {
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	// enable depth testing
+	glEnable(GL_DEPTH_TEST);	
 
 	// render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -224,8 +226,7 @@ int main() {
 		//------------------------------------------------------------------------------------------------------------
 
 		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		//trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
 		trans = glm::rotate(trans,(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 		
 
@@ -242,7 +243,7 @@ int main() {
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
 
