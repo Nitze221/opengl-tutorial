@@ -215,6 +215,22 @@ int main() {
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	// camera
+	//------------------------------------------------------------------------------------------------------------
+	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+	glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+	// glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget); // inverse direction
+
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	// glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+	// glm::vec3 cameraUp = glm::normalize(glm::cross(cameraDirection, cameraRight));
+
+	view = glm::lookAt(cameraPos,	// camera origin in world space
+		cameraTarget,				// camera direction (inverse)
+		up);						// up direction for camera space
+
+
+
 	// enable depth testing
 	glEnable(GL_DEPTH_TEST);	
 
@@ -258,7 +274,13 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		
+		// rotate camera
+		const float radius = 10.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
+		view = glm::lookAt(glm::vec3(camX, 0.0, camZ),
+			cameraTarget,
+			up);
 
 		//bind textures
 		glActiveTexture(GL_TEXTURE0);
