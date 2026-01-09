@@ -20,11 +20,10 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+//camera
 // mouse position variables
 float lastX = 400, lastY = 300;
-
 bool firstMouse = true; // check if this is the first mouse movement of the window
-
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 // fps independent movement speed helper vars
@@ -37,7 +36,7 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -63,13 +62,6 @@ int main() {
 
 	//------------------------------------------------------------------------------------------------------------
 	// vertex data and buffers
-
-	// 2 triangle coords clip space
-
-	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,   // first triangle
-		1, 2, 3    // second triangle
-	};
 
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
@@ -129,13 +121,6 @@ int main() {
 	
 	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	//element buffer (object)
-	//	unsigned int EBO;
-	//glGenBuffers(1, &EBO);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, EBO);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	//tell openGL how to interpret the vertex data
 	// position attribute
@@ -235,11 +220,7 @@ int main() {
 	glm::mat4 view = glm::mat4(1.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-
-	// camera
-	//------------------------------------------------------------------------------------------------------------
-
+	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
 
 
 	// enable depth testing
@@ -262,8 +243,6 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
 
-
-
 		// transformations
 		//------------------------------------------------------------------------------------------------------------
 
@@ -273,7 +252,6 @@ int main() {
 
 		view = camera.GetViewMatrix();
 		
-
 		unsigned int transformLoc = glGetUniformLocation(shader.ID, "transform");
 		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
